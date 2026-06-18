@@ -161,6 +161,66 @@ curl -fsSL https://raw.githubusercontent.com/wild-mental/aztks-review-skill/main
 
 ---
 
+## 동반 서브에이전트 — aztks-ai-peer
+
+이 스킬에는 **AI 산출물 평가용 동반 서브에이전트 `aztks-ai-peer`**가 기본 포함됩니다(`*/agents/aztks-ai-peer.md`). 장시간 자율 작업(예: Claude Code `/goal`의 다중 턴 루프)에서 **평가용 서브에이전트**로 호출하면, 메인 에이전트의 매 턴 산출물을 AZTKS 5차원으로 콤팩트하게 점검하고 **GO / NO-GO** 판정과 다음 최우선 보완(`TOP_FIX`)을 돌려줍니다.
+
+- 평가 대상이 **사람이 아니라 AI 산출물**이라, 도덕 규약은 한 줄로 최소화하고 정확성·유용성·다음 행동 신호에 집중합니다(사람 대상 `/aztks-review`의 비무기화 가드레일과 구분되는 지점).
+- 차원 매핑: **A** 알아서(Coverage) · **Z** 잘(Quality) · **T** 딱(Coherence) · **K** 깔끔(Clarity) · **S** 센스(Consumability).
+- **읽기 전용**(코드·문서 미수정), 출력은 고정 포맷 + 전체 ~1,200자로 콤팩트.
+
+**출력 포맷:**
+
+```
+VERDICT: GO | NO-GO
+SCORECARD: A:<P/C/F> Z:<P/C/F> T:<P/C/F> K:<P/C/F> S:<P/C/F>
+TOP_FIX: <단 하나의 최고 레버리지 다음 행동>
+EVIDENCE: <근거 위치 1–3개>
+NOTES: <CONCERN 한 줄 요약 — 없으면 생략>
+```
+
+### 설치
+
+스킬과 함께 동반 설치합니다(스킬과 동일 범위 권장 — 개인 또는 프로젝트).
+
+```bash
+# Claude Code — 네이티브 서브에이전트 (개인)
+mkdir -p ~/.claude/agents
+curl -fsSL https://raw.githubusercontent.com/wild-mental/aztks-review-skill/main/.claude/agents/aztks-ai-peer.md \
+  -o ~/.claude/agents/aztks-ai-peer.md
+
+# Cursor — 커스텀 에이전트 (개인)
+mkdir -p ~/.cursor/agents
+curl -fsSL https://raw.githubusercontent.com/wild-mental/aztks-review-skill/main/.cursor/agents/aztks-ai-peer.md \
+  -o ~/.cursor/agents/aztks-ai-peer.md
+
+# Codex — 평가 하네스 (개인)
+mkdir -p ~/.agents/agents
+curl -fsSL https://raw.githubusercontent.com/wild-mental/aztks-review-skill/main/.agents/agents/aztks-ai-peer.md \
+  -o ~/.agents/agents/aztks-ai-peer.md
+```
+
+프로젝트 범위로 넣으려면 `~/`를 빼고 repo 루트에서 동일 경로(`.claude/agents/` 등)에 받으면 됩니다.
+
+### 벤더별 호출·사용법
+
+| 도구 | 메커니즘 | 호출 방법 |
+|------|----------|-----------|
+| **Claude Code** | 네이티브 서브에이전트 | `/goal` 본문의 종료/검증 단계에서 "`aztks-ai-peer` 서브에이전트로 직전 산출물을 평가해 VERDICT를 받는다"로 지시하면 Task 도구가 `subagent_type: aztks-ai-peer`로 디스패치합니다. 평소엔 "aztks-ai-peer로 검토해줘"라고 말하거나 설명이 매칭되면 자동 선택됩니다. |
+| **Cursor** | 커스텀 에이전트 | `.cursor/agents/aztks-ai-peer.md`를 커스텀 에이전트로 등록하고 Agent 모드의 평가 단계에서 선택하거나, 본문을 평가 프롬프트로 참조해 직전 산출물을 점검합니다. |
+| **Codex** | 평가 하네스 참조 | 장기 작업 루프의 평가 스텝에서 `.agents/agents/aztks-ai-peer.md`를 읽기 전용 평가 프롬프트로 불러(`$aztks-ai-peer` 또는 `AGENTS.md`에서 참조) GO/NO-GO를 산출합니다. |
+
+**`/goal` 안에서 쓰는 예 (Claude Code):**
+
+```
+## 3) 종료 조건 및 종료 방법
+- 종료 방법:
+  1) 직전 턴 산출물을 aztks-ai-peer 서브에이전트로 평가해 VERDICT를 받는다.
+  2) VERDICT가 NO-GO면 TOP_FIX를 반영하고 계속, GO면 다음 작업으로 진행한다.
+```
+
+---
+
 ## 핵심 행동 원칙 요약
 
 ### Reference Scan Gate — 자료를 먼저 확보
@@ -229,9 +289,12 @@ V(문자수) 측정 → Tier 1회 확정 → 본문 상한 선언 → 상한 절
 ## 스킬 구성
 
 ```
-.cursor/skills/aztks-review/SKILL.md   # Cursor용
-.claude/skills/aztks-review/SKILL.md   # Claude Code용
-.agents/skills/aztks-review/SKILL.md   # Codex용
+.cursor/skills/aztks-review/SKILL.md   # Cursor용 스킬
+.claude/skills/aztks-review/SKILL.md   # Claude Code용 스킬
+.agents/skills/aztks-review/SKILL.md   # Codex용 스킬
+.cursor/agents/aztks-ai-peer.md        # 동반 서브에이전트 (Cursor)
+.claude/agents/aztks-ai-peer.md        # 동반 서브에이전트 (Claude Code)
+.agents/agents/aztks-ai-peer.md        # 동반 서브에이전트 (Codex)
 ```
 
 | 섹션 | 내용 |
@@ -244,6 +307,7 @@ V(문자수) 측정 → Tier 1회 확정 → 본문 상한 선언 → 상한 절
 | Workflow | Scan&Gate → Tier Lock → 분류 → 5차원 검토 → 우선순위·외부화 → 스코어카드 → Output |
 | 출력 형식 | 의도 재진술 + 스코어카드 + 상위 개선 우선순위 + 비무기화 주석 (3개의 `---`로 분리) |
 | Anti-Pattern Block | 인상 비평·분량 폭주·이슈 은폐·비하 어조·기준 미확정 차단 |
+| 동반 서브에이전트 | `aztks-ai-peer` — `/goal` 등 장기 루프용 AI 산출물 평가 하네스(콤팩트 AZTKS · GO/NO-GO) |
 
 ---
 
@@ -307,6 +371,24 @@ invoke.codex=/skills|$aztks-review
 post_install.cursor=Reload Window
 post_install.claude=live reload; restart if new top-level .claude/skills/ after session start
 post_install.codex=restart if skill not detected
+
+companion_subagent=aztks-ai-peer  # AI-facing compact AZTKS evaluator for long-running /goal loops; read-only; returns VERDICT GO/NO-GO + SCORECARD(A/Z/T/K/S P/C/F) + TOP_FIX + EVIDENCE
+agent.paths.user:
+  claude=~/.claude/agents/aztks-ai-peer.md
+  cursor=~/.cursor/agents/aztks-ai-peer.md
+  codex=~/.agents/agents/aztks-ai-peer.md
+agent.paths.project:
+  claude=.claude/agents/aztks-ai-peer.md
+  cursor=.cursor/agents/aztks-ai-peer.md
+  codex=.agents/agents/aztks-ai-peer.md
+agent.install.user.claude=mkdir -p ~/.claude/agents && curl -fsSL https://raw.githubusercontent.com/wild-mental/aztks-review-skill/main/.claude/agents/aztks-ai-peer.md -o ~/.claude/agents/aztks-ai-peer.md
+agent.install.user.cursor=mkdir -p ~/.cursor/agents && curl -fsSL https://raw.githubusercontent.com/wild-mental/aztks-review-skill/main/.cursor/agents/aztks-ai-peer.md -o ~/.cursor/agents/aztks-ai-peer.md
+agent.install.user.codex=mkdir -p ~/.agents/agents && curl -fsSL https://raw.githubusercontent.com/wild-mental/aztks-review-skill/main/.agents/agents/aztks-ai-peer.md -o ~/.agents/agents/aztks-ai-peer.md
+agent.invoke.claude=dispatch via Task tool as subagent_type: aztks-ai-peer (e.g. from a /goal verification/termination step)
+agent.invoke.cursor=register as a custom agent; select it for the eval step in Agent mode
+agent.invoke.codex=reference as a read-only evaluator prompt in the loop's eval step ($aztks-ai-peer or via AGENTS.md)
+agent.target=AI deliverables (not humans) — ethics minimized to one line; rubric kept compact
+agent.output=VERDICT / SCORECARD / TOP_FIX / EVIDENCE / NOTES; whole output <= ~1200 chars
 
 contract:
   output_file=<docs>/reviews/<slug>-aztks-review.md  # full review saved to file; conversation gets summary only

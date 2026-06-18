@@ -288,6 +288,19 @@ V를 측정하고 Tier·본문 상한을 **한 줄로 선언**한다. 이후 상
 
 ---
 
+# 동반 서브에이전트 — aztks-ai-peer (장시간 /goal 루프용)
+
+이 스킬은 동반 서브에이전트 **`aztks-ai-peer`**를 함께 패키징한다(`*/agents/aztks-ai-peer.md`). 사람이 아니라 **AI 산출물**을 평가하는 콤팩트 하네스로, 장시간 자율 작업(`/goal` 다중 턴 루프)에서 평가용 서브에이전트로 호출해 AZTKS 5차원을 한 번에 점검하고 **GO / NO-GO**를 돌려준다.
+
+- 대상이 사람이 아니므로 **도덕 규약은 한 줄로 최소화**하고 정확성·유용성·다음 행동 신호에 집중한다.
+- 차원은 AI 산출물에 맞춰 매핑: A 알아서(Coverage) / Z 잘(Quality) / T 딱(Coherence) / K 깔끔(Clarity) / S 센스(Consumability).
+- 출력은 `VERDICT / SCORECARD / TOP_FIX / EVIDENCE / NOTES`로 고정(전체 ~1,200자), 읽기 전용.
+- 호출: Claude Code는 `/goal` 검증 단계에서 `subagent_type: aztks-ai-peer`로 디스패치(네이티브). Cursor는 커스텀 에이전트, Codex는 평가 단계 프롬프트로 참조한다 — 벤더별 사용법은 README 참조.
+
+`/aztks-review`(사람 대상, 비무기화 가드레일 최우선)와 `aztks-ai-peer`(AI 대상, 콤팩트 판정)는 **상호 보완**이다 — 대상이 사람이면 전자, 자동 루프 평가면 후자.
+
+---
+
 # 최종 시스템 프롬프트
 
 ```
