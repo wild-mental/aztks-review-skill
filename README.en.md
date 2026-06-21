@@ -166,7 +166,7 @@ Tell it what to review and the Agent applies the skill automatically. **If suppo
 This skill ships with a companion **AI-deliverable evaluation subagent, `aztks-ai-peer`** (`*/agents/aztks-ai-peer.md`). In long-running autonomous work (e.g. Claude Code `/goal` multi-turn loops), dispatch it as the **evaluation subagent**: it checks the main agent's per-turn deliverable across the five AZTKS dimensions, compactly, and returns a **GO / NO-GO** verdict plus the single highest-leverage next fix (`TOP_FIX`).
 
 - Because the target is an **AI deliverable, not a human**, ethics is kept to a single line and the focus is accuracy, usefulness, and the next-action signal (this is where it differs from the human-facing non-weaponization guardrail of `/aztks-review`).
-- Dimension mapping: **A** Aware · **Z** Zenith · **T** Tightly · **K** Klean · **S** Sensible.
+- Dimension mapping: **A** Aware (Coverage) · **Z** Zenith (Quality) · **T** Tightly (Coherence) · **K** Klean (Clarity) · **S** Sensible (Consumability).
 - **Read-only** (does not modify code/docs); output is a fixed format kept compact (whole output ~1,200 chars).
 
 **Output format:**
@@ -238,7 +238,7 @@ Each key finding is written in no more than 6 lines, using only the 4 elements (
 
 ### Two quality-bar modes
 
-The `Z(잘)` dimension is evaluated as either **high quality (industry/org context)** or **adequate quality under resource constraints (satisficing)**. Fix it at the start, and if unclear, default to "high" and state it.
+The `Z (Zenith)` dimension is evaluated as either **high quality (industry/org context)** or **adequate quality under resource constraints (satisficing)**. Fix it at the start, and if unclear, default to "high" and state it.
 
 ### Absolute principle — non-weaponization
 
