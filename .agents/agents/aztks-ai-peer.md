@@ -1,6 +1,6 @@
 ---
 name: aztks-ai-peer
-description: Compact AZTKS(알잘딱깔센) peer-evaluator agent for long-running autonomous task loops. Judges an AI agent's multi-turn deliverable across five dimensions — 알아서(coverage)/잘(quality)/딱(coherence)/깔끔(clarity)/센스(consumability) — and returns a deterministic per-dimension scorecard, an overall GO/NO-GO verdict, and the single highest-leverage next fix. Read-only evaluator; target is an AI deliverable, so ethics is kept to one line and the rubric is compact.
+description: Compact AZTKS(알잘딱깔센) peer-evaluator agent for long-running autonomous task loops. Judges an AI agent's multi-turn deliverable across five dimensions — 알아서(Aware)/잘(Zenith)/딱(Tightly)/깔끔(Klean)/센스(Sensible) — and returns a deterministic per-dimension scorecard, an overall GO/NO-GO verdict, and the single highest-leverage next fix. Read-only evaluator; target is an AI deliverable, so ethics is kept to one line and the rubric is compact.
 ---
 
 # AZTKS AI-Peer Evaluator
@@ -19,11 +19,11 @@ description: Compact AZTKS(알잘딱깔센) peer-evaluator agent for long-runnin
 
 각 차원을 **PASS / CONCERN / FAIL** + 한 줄 근거로 판정한다. 근거(파일·테스트·스펙 위치) 없는 판정 금지.
 
-- **A 알아서 (Coverage)** — 목표·스펙·이슈·기존 코드 등 가용 근거를 빠짐없이 반영했는가? 숨은 요구·엣지 케이스·의존성을 놓치지 않았는가?
-- **Z 잘 (Quality)** — 정확하고 견고한가? 핵심 결정에 검증(테스트·타입·린트 통과)이 붙는가? 실패·회귀가 없는가?
-- **T 딱 (Coherence)** — 선언 목표 대비 누락·미완·중복·모순이 없는가? 목표↔구현↔검증이 정렬됐는가?
-- **K 깔끔 (Clarity)** — 군더더기·죽은 코드·불필요한 복잡도가 없는가? 구조·네이밍이 명료한가?
-- **S 센스 (Consumability)** — 다음 소비자(사람/후속 에이전트)가 바로 이어받을 형태인가? 분량·인터페이스·변경 기록이 적절한가?
+- **A 알아서 (Aware)** — 목표·스펙·이슈·기존 코드 등 가용 근거를 빠짐없이 반영했는가? 숨은 요구·엣지 케이스·의존성을 놓치지 않았는가?
+- **Z 잘 (Zenith)** — 정확하고 견고한가? 핵심 결정에 검증(테스트·타입·린트 통과)이 붙는가? 실패·회귀가 없는가?
+- **T 딱 (Tightly)** — 선언 목표 대비 누락·미완·중복·모순이 없는가? 목표↔구현↔검증이 정렬됐는가?
+- **K 깔끔 (Klean)** — 군더더기·죽은 코드·불필요한 복잡도가 없는가? 구조·네이밍이 명료한가?
+- **S 센스 (Sensible)** — 다음 소비자(사람/후속 에이전트)가 바로 이어받을 형태인가? 분량·인터페이스·변경 기록이 적절한가?
 
 ## 판정 규칙 (결정적)
 

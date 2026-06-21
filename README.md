@@ -7,7 +7,7 @@
 
 **대량의 비즈니스 계획서 · 서비스 구현 계획서(PRD/SRS) · 프로그래밍 구현 결과물을 `알잘딱깔센`(AZTKS) 5차원으로 리뷰해, 분량이 통제된 건설적 리뷰 리포트를 산출하는 Skill입니다. Cursor, Claude Code, Codex 모두 지원합니다.**
 
-`알잘딱깔센`은 "일머리"의 다섯 축 — **알**아서 · **잘** · **딱** 떨어지게 · **깔**끔하게 · **센**스있게 — 이고, 그 이니셜을 로마자로 옮긴 것이 `AZTKS`입니다. 이 스킬은 리뷰 대상을 이 5차원으로 평가하되, **근거 자료를 먼저 확보**하고, **자료가 많아도 리포트가 무한정 길어지지 않도록 명시적 분량 상한**을 두며, 무엇보다 **`알잘딱깔센`을 무기화하지 않는** 건설적 어조를 절대 원칙으로 지킵니다.
+`알잘딱깔센`은 "일머리"의 다섯 축 — **알**아서 · **잘** · **딱** 떨어지게 · **깔**끔하게 · **센**스있게 — 이고, 그 이니셜을 로마자로 옮긴 것이 `AZTKS`이며, 영문으로도 **A**ware · **Z**enith · **T**ightly · **K**lean · **S**ensible 로 읽히는 약어입니다. 이 스킬은 리뷰 대상을 이 5차원으로 평가하되, **근거 자료를 먼저 확보**하고, **자료가 많아도 리포트가 무한정 길어지지 않도록 명시적 분량 상한**을 두며, 무엇보다 **`알잘딱깔센`을 무기화하지 않는** 건설적 어조를 절대 원칙으로 지킵니다.
 
 ---
 
@@ -17,11 +17,11 @@
 
 | 코드 | 차원 | 리뷰 관점 |
 |------|------|-----------|
-| **A** | 알아서 (Initiative) | 가용한 모든 근거를 빠짐없이 반영했는가, 숨은 요구를 추론했는가 |
-| **Z** | 잘 (Quality) | 선택한 기준(높음/적정)에서 품질·의사결정 근거가 탄탄한가 |
-| **T** | 딱 떨어지게 (Coherence) | 누락·미완·중복·모순 없이 목표↔범위↔구현↔검증이 정렬됐는가 |
-| **K** | 깔끔하게 (Conciseness) | 군더더기·장황함이 없고 요약 계층이 독자를 배려하는가 |
-| **S** | 센스있게 (Tact) | 어조·분량·타이밍·감정톤이 수신자·조직 맥락에 맞는가 |
+| **A** | 알아서 (Aware) | 가용한 모든 근거를 빠짐없이 반영했는가, 숨은 요구를 추론했는가 |
+| **Z** | 잘 (Zenith) | 선택한 기준(높음/적정)에서 품질·의사결정 근거가 탄탄한가 |
+| **T** | 딱 떨어지게 (Tightly) | 누락·미완·중복·모순 없이 목표↔범위↔구현↔검증이 정렬됐는가 |
+| **K** | 깔끔하게 (Klean) | 군더더기·장황함이 없고 요약 계층이 독자를 배려하는가 |
+| **S** | 센스있게 (Sensible) | 어조·분량·타이밍·감정톤이 수신자·조직 맥락에 맞는가 |
 
 각 차원에 **등급(◎ 탁월 / ○ 충족 / △ 보완 / ✕ 미흡 / — 판단보류) + 한 줄 근거**를 부여하고, 종합 등급과 상위 개선 우선순위를 도출합니다.
 
@@ -166,7 +166,7 @@ curl -fsSL https://raw.githubusercontent.com/wild-mental/aztks-review-skill/main
 이 스킬에는 **AI 산출물 평가용 동반 서브에이전트 `aztks-ai-peer`**가 기본 포함됩니다(`*/agents/aztks-ai-peer.md`). 장시간 자율 작업(예: Claude Code `/goal`의 다중 턴 루프)에서 **평가용 서브에이전트**로 호출하면, 메인 에이전트의 매 턴 산출물을 AZTKS 5차원으로 콤팩트하게 점검하고 **GO / NO-GO** 판정과 다음 최우선 보완(`TOP_FIX`)을 돌려줍니다.
 
 - 평가 대상이 **사람이 아니라 AI 산출물**이라, 도덕 규약은 한 줄로 최소화하고 정확성·유용성·다음 행동 신호에 집중합니다(사람 대상 `/aztks-review`의 비무기화 가드레일과 구분되는 지점).
-- 차원 매핑: **A** 알아서(Coverage) · **Z** 잘(Quality) · **T** 딱(Coherence) · **K** 깔끔(Clarity) · **S** 센스(Consumability).
+- 차원 매핑: **A** 알아서(Aware) · **Z** 잘(Zenith) · **T** 딱(Tightly) · **K** 깔끔(Klean) · **S** 센스(Sensible).
 - **읽기 전용**(코드·문서 미수정), 출력은 고정 포맷 + 전체 ~1,200자로 콤팩트.
 
 **출력 포맷:**
@@ -393,7 +393,7 @@ agent.output=VERDICT / SCORECARD / TOP_FIX / EVIDENCE / NOTES; whole output <= ~
 contract:
   output_file=<docs>/reviews/<slug>-aztks-review.md  # full review saved to file; conversation gets summary only
   docs_root=<docs> = existing docs dir, else docs/ ; <slug> = kebab-case from review target name
-  dimensions=[A 알아서/initiative, Z 잘/quality, T 딱/coherence, K 깔끔/conciseness, S 센스/tact]
+  dimensions=[A 알아서/aware, Z 잘/zenith, T 딱/tightly, K 깔끔/klean, S 센스/sensible]
   grade_scale=[◎ 탁월, ○ 충족, △ 보완, ✕ 미흡, — 판단보류]  # every dimension graded + 1-line rationale
   reference_gate=scan call location first; if target ambiguous or evidence thin, explicitly ask for business/service plan, PRD, SRS, app project, context evidence, and quality bar
   quality_bar=[high (industry/org context), satisficing (resource-constrained)]  # default high + note if unspecified

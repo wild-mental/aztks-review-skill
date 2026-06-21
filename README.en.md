@@ -7,7 +7,7 @@
 
 **A Skill that reviews large volumes of business plans · service implementation plans (PRD/SRS) · programming deliverables along the five dimensions of `알잘딱깔센`(AZTKS), producing a constructive review report with a controlled length. Supports Cursor, Claude Code, and Codex alike.**
 
-`알잘딱깔센` is the five axes of "work sense" — **알**아서 (Initiative) · **잘** (Quality) · **딱** 떨어지게 (Coherence) · **깔**끔하게 (Conciseness) · **센**스있게 (Tact) — and `AZTKS` is the romanized rendering of those initials. This skill evaluates the review target along these five dimensions, but it **secures supporting evidence first**, sets an **explicit length cap so the report does not grow without bound even when there is a lot of material**, and above all upholds, as an absolute principle, a constructive tone that **never weaponizes `알잘딱깔센`**.
+`알잘딱깔센` is the five axes of "work sense" — **알**아서 (Aware) · **잘** (Zenith) · **딱** 떨어지게 (Tightly) · **깔**끔하게 (Klean) · **센**스있게 (Sensible) — and `AZTKS` is the romanized rendering of those initials, which also reads as an English mnemonic: **A**ware · **Z**enith · **T**ightly · **K**lean · **S**ensible. This skill evaluates the review target along these five dimensions, but it **secures supporting evidence first**, sets an **explicit length cap so the report does not grow without bound even when there is a lot of material**, and above all upholds, as an absolute principle, a constructive tone that **never weaponizes `알잘딱깔센`**.
 
 ---
 
@@ -17,11 +17,11 @@
 
 | Code | Dimension | Review lens |
 |------|------|-----------|
-| **A** | 알아서 (Initiative) | Did it reflect every available piece of evidence without omission, and infer hidden requirements? |
-| **Z** | 잘 (Quality) | Is the quality and the rationale for decisions solid at the chosen bar (high/adequate)? |
-| **T** | 딱 떨어지게 (Coherence) | Are goal↔scope↔implementation↔verification aligned, with no omissions, gaps, duplications, or contradictions? |
-| **K** | 깔끔하게 (Conciseness) | Is it free of clutter and verbosity, with a summary hierarchy that considers the reader? |
-| **S** | 센스있게 (Tact) | Do the tone, length, timing, and emotional register fit the recipient and organizational context? |
+| **A** | 알아서 (Aware) | Did it reflect every available piece of evidence without omission, and infer hidden requirements? |
+| **Z** | 잘 (Zenith) | Is the quality and the rationale for decisions solid at the chosen bar (high/adequate)? |
+| **T** | 딱 떨어지게 (Tightly) | Are goal↔scope↔implementation↔verification aligned, with no omissions, gaps, duplications, or contradictions? |
+| **K** | 깔끔하게 (Klean) | Is it free of clutter and verbosity, with a summary hierarchy that considers the reader? |
+| **S** | 센스있게 (Sensible) | Do the tone, length, timing, and emotional register fit the recipient and organizational context? |
 
 Each dimension is assigned a **grade (◎ excellent / ○ meets / △ needs work / ✕ insufficient / — judgment withheld) + a one-line rationale**, from which an overall grade and the top improvement priorities are derived.
 
@@ -166,7 +166,7 @@ Tell it what to review and the Agent applies the skill automatically. **If suppo
 This skill ships with a companion **AI-deliverable evaluation subagent, `aztks-ai-peer`** (`*/agents/aztks-ai-peer.md`). In long-running autonomous work (e.g. Claude Code `/goal` multi-turn loops), dispatch it as the **evaluation subagent**: it checks the main agent's per-turn deliverable across the five AZTKS dimensions, compactly, and returns a **GO / NO-GO** verdict plus the single highest-leverage next fix (`TOP_FIX`).
 
 - Because the target is an **AI deliverable, not a human**, ethics is kept to a single line and the focus is accuracy, usefulness, and the next-action signal (this is where it differs from the human-facing non-weaponization guardrail of `/aztks-review`).
-- Dimension mapping: **A** Initiative (Coverage) · **Z** Quality · **T** Coherence · **K** Clarity · **S** Sense (Consumability).
+- Dimension mapping: **A** Aware · **Z** Zenith · **T** Tightly · **K** Klean · **S** Sensible.
 - **Read-only** (does not modify code/docs); output is a fixed format kept compact (whole output ~1,200 chars).
 
 **Output format:**
@@ -270,7 +270,7 @@ Each call's final response separates four areas with three `---` horizontal rule
 | T 딱 | △ | PRD §4 partial-refund requirement not reflected in implementation/tests |
 | K 깔끔 | ○ | Module structure is clear; dead code in 2 places |
 | S 센스 | ○ | Error message user tone is good |
-| **Overall** | **○** | Ship-ready level; prioritize fixing the one T (coherence) item |
+| **Overall** | **○** | Ship-ready level; prioritize fixing the one T (Tightly) item |
 
 ---
 
@@ -393,7 +393,7 @@ agent.output=VERDICT / SCORECARD / TOP_FIX / EVIDENCE / NOTES; whole output <= ~
 contract:
   output_file=<docs>/reviews/<slug>-aztks-review.md  # full review saved to file; conversation gets summary only
   docs_root=<docs> = existing docs dir, else docs/ ; <slug> = kebab-case from review target name
-  dimensions=[A 알아서/initiative, Z 잘/quality, T 딱/coherence, K 깔끔/conciseness, S 센스/tact]
+  dimensions=[A 알아서/aware, Z 잘/zenith, T 딱/tightly, K 깔끔/klean, S 센스/sensible]
   grade_scale=[◎ 탁월, ○ 충족, △ 보완, ✕ 미흡, — 판단보류]  # every dimension graded + 1-line rationale
   reference_gate=scan call location first; if target ambiguous or evidence thin, explicitly ask for business/service plan, PRD, SRS, app project, context evidence, and quality bar
   quality_bar=[high (industry/org context), satisficing (resource-constrained)]  # default high + note if unspecified

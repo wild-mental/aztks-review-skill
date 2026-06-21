@@ -1,6 +1,6 @@
 ---
 name: aztks-review
-description: Reviews large business plans, service implementation specs (PRD/SRS), or code deliverables against the 알잘딱깔센(AZTKS) 5-dimension rubric — 알아서(initiative) · 잘(quality) · 딱 떨어지게(coherence) · 깔끔하게(conciseness) · 센스있게(tact) — and produces a bounded, constructive, reader-considerate review with a per-dimension scorecard. Use when the user wants a review of a large business plan, 서비스 기획서, PRD, SRS, or an app/code project, or mentions "aztks-review", "/aztks", "알잘딱깔센", "AZTKS", "리뷰", "기획서 검토", "코드 리뷰". Scans referenceable material at the call location, asks for it explicitly when insufficient, locks a volume tier, and hard-caps report length while scaling coverage to reference volume. Critique is always constructive — the AZTKS principle is never weaponized.
+description: Reviews large business plans, service implementation specs (PRD/SRS), or code deliverables against the 알잘딱깔센(AZTKS) 5-dimension rubric — 알아서(Aware) · 잘(Zenith) · 딱 떨어지게(Tightly) · 깔끔하게(Klean) · 센스있게(Sensible) — and produces a bounded, constructive, reader-considerate review with a per-dimension scorecard. Use when the user wants a review of a large business plan, 서비스 기획서, PRD, SRS, or an app/code project, or mentions "aztks-review", "/aztks", "알잘딱깔센", "AZTKS", "리뷰", "기획서 검토", "코드 리뷰". Scans referenceable material at the call location, asks for it explicitly when insufficient, locks a volume tier, and hard-caps report length while scaling coverage to reference volume. Critique is always constructive — the AZTKS principle is never weaponized.
 ---
 
 # AZTKS Review Operating Rules
@@ -50,11 +50,11 @@ description: Reviews large business plans, service implementation specs (PRD/SRS
 
 | 코드 | 차원 | 핵심 의미 | 리뷰 관점(무엇을 보는가) |
 |------|------|-----------|---------------------------|
-| **A** | 알아서 (Initiative) | 모든 채널·출처를 통섭적으로 활용해 요구사항을 추론 | 가용한 모든 근거 자료를 빠짐없이 반영했는가? 명시되지 않은 요구·제약·이해관계자를 추론했는가? |
-| **Z** | 잘 (Quality) | 맥락에서 의심할 수 없는 높은 퀄리티, 또는 자원 대비 적정 퀄리티 | 결과물 품질이 선택한 기준(높음/적정)을 충족하는가? 핵심 의사결정의 근거가 탄탄한가? |
-| **T** | 딱 떨어지게 (Coherence) | 선언한 과업 기준 내적·외적 정합성, 미작업·과소처리·정렬 깨짐 없음 | 누락·미완·중복·모순이 없는가? 목표↔범위↔구현↔검증이 정렬돼 있는가? |
-| **K** | 깔끔하게 (Conciseness) | 군더더기 없음, 단계적 요약으로 독자 배려, 장황·지루함 없음 | 불필요한 군더더기가 없는가? 큰 과업도 요약 계층이 독자를 배려하는가? |
-| **S** | 센스있게 (Tact) | 사회공학적·인간적·조직적 고려, 타이밍·분량·어조·감정톤 | 어조·분량·타이밍이 수신자·조직 맥락에 맞는가? 의사소통이 매끄럽고 호감을 주는가? |
+| **A** | 알아서 (Aware) | 모든 채널·출처를 통섭적으로 활용해 요구사항을 추론 | 가용한 모든 근거 자료를 빠짐없이 반영했는가? 명시되지 않은 요구·제약·이해관계자를 추론했는가? |
+| **Z** | 잘 (Zenith) | 맥락에서 의심할 수 없는 높은 퀄리티, 또는 자원 대비 적정 퀄리티 | 결과물 품질이 선택한 기준(높음/적정)을 충족하는가? 핵심 의사결정의 근거가 탄탄한가? |
+| **T** | 딱 떨어지게 (Tightly) | 선언한 과업 기준 내적·외적 정합성, 미작업·과소처리·정렬 깨짐 없음 | 누락·미완·중복·모순이 없는가? 목표↔범위↔구현↔검증이 정렬돼 있는가? |
+| **K** | 깔끔하게 (Klean) | 군더더기 없음, 단계적 요약으로 독자 배려, 장황·지루함 없음 | 불필요한 군더더기가 없는가? 큰 과업도 요약 계층이 독자를 배려하는가? |
+| **S** | 센스있게 (Sensible) | 사회공학적·인간적·조직적 고려, 타이밍·분량·어조·감정톤 | 어조·분량·타이밍이 수신자·조직 맥락에 맞는가? 의사소통이 매끄럽고 호감을 주는가? |
 
 각 차원은 독립적으로 보지만, **T(정합성)** 위반은 대개 전역 영향이라 우선순위가 높고, **K(깔끔)**·**S(센스)**는 리뷰어 자신도 산출물에서 지켜야 하는 메타 기준이다.
 
@@ -292,7 +292,7 @@ V를 측정하고 Tier·본문 상한을 **한 줄로 선언**한다. 이후 상
 이 스킬은 동반 서브에이전트 **`aztks-ai-peer`**를 함께 패키징한다(`*/agents/aztks-ai-peer.md`). 사람이 아니라 **AI 산출물**을 평가하는 콤팩트 하네스로, 장시간 자율 작업(`/goal` 다중 턴 루프)에서 평가용 서브에이전트로 호출해 AZTKS 5차원을 한 번에 점검하고 **GO / NO-GO**를 돌려준다.
 
 - 대상이 사람이 아니므로 **도덕 규약은 한 줄로 최소화**하고 정확성·유용성·다음 행동 신호에 집중한다.
-- 차원은 AI 산출물에 맞춰 매핑: A 알아서(Coverage) / Z 잘(Quality) / T 딱(Coherence) / K 깔끔(Clarity) / S 센스(Consumability).
+- 차원은 AI 산출물에 맞춰 매핑: A 알아서(Aware) / Z 잘(Zenith) / T 딱(Tightly) / K 깔끔(Klean) / S 센스(Sensible).
 - 출력은 `VERDICT / SCORECARD / TOP_FIX / EVIDENCE / NOTES`로 고정(전체 ~1,200자), 읽기 전용.
 - 호출: Claude Code는 `/goal` 검증 단계에서 `subagent_type: aztks-ai-peer`로 디스패치(네이티브). Cursor는 커스텀 에이전트, Codex는 평가 단계 프롬프트로 참조한다 — 벤더별 사용법은 README 참조.
 
